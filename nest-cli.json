@@ -11,8 +11,10 @@
       "**/*.svg",
       "**/*.jpg",
       "**/*.jpeg",
-      "**/*.xlsx"
+      "**/*.xlsx",
+      "**/test-setup.ts"
     ],
-    "plugins": ["@nestjs/swagger"]
+    "plugins": ["@nestjs/swagger"],
+    "watchAssets": true
   }
 }
