@@ -1,73 +1,104 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# MovieDB to PDF Generator
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-000000?style=for-the-badge&logo=axios&logoColor=white)
+![Nestjs](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![Puppeteer](https://img.shields.io/badge/Puppeteer-40B5A4?style=for-the-badge&logo=puppeteer&logoColor=white)
+![Pug](https://img.shields.io/badge/Pug-A86454?style=for-the-badge&logo=pug&logoColor=white)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This application fetches movie data from The Movie Database API and generates PDF documents containing information about each movie, including pictures. Each PDF includes the movie's title, release date, vote average, and poster image.
 
-## Description
+## Table of Contents
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Features](#features)
+- [Dependencies](#dependencies)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Generate PDF for a list of movies](#generate-pdf-for-a-list-of-movies)
+  - [Generate PDF for a Single Movie](#generate-pdf-for-a-single-movie)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- Fetches movie data from TMDb API.
+- Generates PDF document with list of latest new movies.
+- Includes movie title, release date, vote average, and poster image in the PDF.
+- Supports batch processing of multiple movies.
+- PDF documents contains pictures and links for download PDF file for each movie in list. (Links for download new PDF file by movie ID)
+
+## Dependencies
+
+  1. express: For building the web server.
+  2. axios: For making HTTP requests to the TMDb API.
+  3. pug: For rendering HTML templates.
+  4. puppeteer: For generating PDFs from HTML content.
+  5. dotenv: For loading environment variables from a .env file.
+
+## Prerequisites
+
+- Node.js (>= 20.x)
+- npm (>= 6.x)
+- TMDb API Key (Get it from [here](https://www.themoviedb.org/documentation/api))
 
 ## Installation
 
-```bash
-$ npm install
-```
-
-## Running the app
+Clone the repository:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone <repo>
+cd movie-pdf-generator
 ```
 
-## Test
+Install dependencies:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Support
+Create a `.env` file in the root directory and add your TMDb API key:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+PORT=8006
+SELF_URL=http://localhost:8006
+THE_MOVIE_DB_READ_API_KEY=""
+```
 
-## Stay in touch
+Start the application:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+npm run start:dev
+```
+
+## Usage
+
+### Generate PDF for a list of movies
+
+Open your browser and navigate to `http://localhost:8006/movies`.
+
+It will download PDF file with list of latest new movies.
+
+Click to any movie title in list to download PDF file with full information about this movie with poster image.
+
+<img src="./public/movies-pdf.png" alt="Movies" width="400"/>
+
+### Generate PDF for a Single Movie
+
+Open your browser and navigate to `http://localhost:8006/movies/550`. (550 - movie ID)
+
+It will download PDF file with full information about movie with poster image, release date, etc...
+
+Perfect working as random movie, just imagine random number and put it to URL.
+
+<img src="./public/movie-pdf.png" alt="Movie" width="400"/>
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the MIT License.
